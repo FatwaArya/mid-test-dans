@@ -1,21 +1,17 @@
-import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { getProducts } from "../store/slices/product";
-import { useCallback } from "react";
+import useProductStore from "../store/slices/productZustand";
 
 export default function ProductPage() {
-  const dispatch = useDispatch();
   const navigate = useNavigate();
-  const products = useSelector((state) => state.products.products);
-
-  const init = useCallback(() => {
-    dispatch(getProducts());
-  }, [dispatch]);
+  const getProduct = useProductStore((state) => state.getProducts);
+  const products = useProductStore((state) => state.products);
 
   useEffect(() => {
-    init();
-  }, [init]);
+    getProduct();
+  }, []);
+
+  console.log(products);
 
   return (
     <>
@@ -23,7 +19,7 @@ export default function ProductPage() {
         <div className="mx-auto max-w-2xl py-16 px-4 sm:py-24 sm:px-6 lg:max-w-7xl lg:px-8">
           <h2 className="sr-only">Products</h2>
           <div className="grid grid-cols-1 gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 xl:gap-x-8">
-            {/* {products.products.map((product) => (
+            {products?.map((product) => (
               <div
                 key={product.id}
                 className="group"
@@ -43,7 +39,7 @@ export default function ProductPage() {
                   {product.price}
                 </p>
               </div>
-            ))} */}
+            ))}
           </div>
         </div>
       </div>

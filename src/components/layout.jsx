@@ -30,7 +30,8 @@ function classNames(...classes) {
 
 export default function Example() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
-  const { userInfo } = useSelector((state) => state.user);
+  // const { userInfo, loading } = useSelector((state) => state.user);
+
   const [navigation, setNavigation] = useState([
     { name: "Dashboard", href: "/products", icon: HomeIcon, current: false },
   ]);
@@ -39,11 +40,6 @@ export default function Example() {
   const navigate = useNavigate();
 
   //if userinfo is empty, then redirect to login page
-  useEffect(() => {
-    if (userInfo === null) {
-      navigate("/");
-    }
-  }, [userInfo]);
 
   useEffect(() => {
     if (asPath) {
@@ -290,7 +286,7 @@ export default function Example() {
             <div className="py-6">
               <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8">
                 <h1 className="text-2xl font-semibold text-gray-900">
-                  Hello {userInfo.name}
+                  {/* Hello {userInfo.name} */}
                 </h1>
               </div>
               <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8">
