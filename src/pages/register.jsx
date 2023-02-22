@@ -2,9 +2,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import axios from "axios";
-import { setLocalStorage } from "../store/helper/localstorage";
-import { LOCAL_STORAGE_TOKEN } from "../store/constants";
-import { registerUser, selectAllUsers } from "../store/user";
 import { useEffect } from "react";
 
 export default function Register() {

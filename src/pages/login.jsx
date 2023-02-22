@@ -2,14 +2,14 @@
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { loginUser, selectAllUsers } from "../store/user";
+import { login } from "../store/slices/user";
 
 export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const navigate = useNavigate();
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   return (
     <>
       <div className="min-h-full flex flex-col justify-center py-12 sm:px-6 lg:px-8">
@@ -32,7 +32,9 @@ export default function Login() {
                 e.preventDefault();
                 const email = e.target.email.value;
                 const password = e.target.password.value;
-                dispatch(loginUser({ email, password }));
+                const user = { email, password };
+                dispatch(login(user));
+
                 navigate("/products");
               }}
             >

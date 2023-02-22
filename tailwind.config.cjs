@@ -4,7 +4,11 @@ module.exports = {
   darkMode: ["class", '[data-mode="dark"]'],
 
   theme: {
-    extend: {},
+    extend: {
+      gridTemplateRows: {
+        "[auto,auto,1fr]": "auto auto 1fr",
+      },
+    },
   },
   plugins: [require("@tailwindcss/forms")],
 };

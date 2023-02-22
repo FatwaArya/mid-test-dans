@@ -14,7 +14,8 @@ function App() {
         <Route path="/register" element={<Register />} />
         <Route element={<Layout />}>
           <Route path="/products" element={<ProductPage />} />
-          {/* <Route path="/students/news" element={<StudentForm />} /> */}
+          {/* product detail with route id */}
+          {/* <Route path="/products/:id" element={<ProductDetail />} /> */}
         </Route>
 
         <Route path="*" element={<h1>404</h1>} />

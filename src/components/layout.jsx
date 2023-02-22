@@ -16,7 +16,7 @@ import {
 } from "@heroicons/react/24/outline";
 import { MagnifyingGlassCircleIcon } from "@heroicons/react/24/solid";
 import { useSelector, useDispatch } from "react-redux";
-import { selectAllUsers } from "../store/user";
+import { useNavigate } from "react-router-dom";
 
 const userNavigation = [
   { name: "Your Profile", href: "#" },
@@ -30,20 +30,21 @@ function classNames(...classes) {
 
 export default function Example() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
-  // const dispatch = useDispatch();
-  // const user = useSelector(selectAllUsers);
-
+  const { userInfo } = useSelector((state) => state.user);
   const [navigation, setNavigation] = useState([
-    { name: "Dashboard", href: "/students", icon: HomeIcon, current: false },
-    {
-      name: "Student",
-      href: "/students/news",
-      icon: UsersIcon,
-      current: false,
-    },
+    { name: "Dashboard", href: "/products", icon: HomeIcon, current: false },
   ]);
 
   const asPath = useLocation();
+  const navigate = useNavigate();
+
+  //if userinfo is empty, then redirect to login page
+  useEffect(() => {
+    if (userInfo === null) {
+      navigate("/");
+    }
+  }, [userInfo]);
+
   useEffect(() => {
     if (asPath) {
       const newNavigation = navigation.map((nav) => {
@@ -55,7 +56,7 @@ export default function Example() {
       setNavigation(newNavigation);
     }
   }, [asPath]);
-  // const user = useSelector(selectUser);
+
   return (
     <>
       {/*
@@ -289,10 +290,7 @@ export default function Example() {
             <div className="py-6">
               <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8">
                 <h1 className="text-2xl font-semibold text-gray-900">
-                  {/* Hello {user.user.email.split("@")[0]} */}
-                  {window.location.href.includes("new")
-                    ? "New Student"
-                    : " Dashboard Student"}
+                  Hello {userInfo.name}
                 </h1>
               </div>
               <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8">
