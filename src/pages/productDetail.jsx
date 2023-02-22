@@ -1,8 +1,10 @@
 import { useState } from "react";
 import { StarIcon } from "@heroicons/react/20/solid";
 import useProductStore from "../store/slices/productZustand";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchProduct } from "../store/slices/product";
 import { useParams } from "react-router-dom";
-import { useEffect } from "react";
+import { useEffect, useCallback } from "react";
 
 const reviews = { href: "#", average: 4, totalCount: 117 };
 
@@ -64,15 +66,28 @@ function classNames(...classes) {
 
 export default function ProductDetail() {
   const { id } = useParams();
-  const product = useProductStore((state) => state.products);
-  const getProduct = useProductStore((state) => state.getProduct);
-  console.log(product);
+  //   const product = useProductStore((state) => state.products);
+  //   const getProduct = useProductStore((state) => state.getProduct);
+  //   console.log(product);
+  //   useEffect(() => {
+  //     getProduct(id);
+  //   }, [id]);
+
+  const product = useSelector((state) => state.products);
+  const dispatch = useDispatch();
+
+  const getProduct = useCallback(() => {
+    dispatch(fetchProduct(id));
+  }, [dispatch, id]);
   useEffect(() => {
-    getProduct(id);
-  }, [id]);
+    getProduct();
+  }, [getProduct]);
+
+  console.log(product);
 
   return (
     <>
+      {" "}
       <div className="bg-white">
         <div className="pt-6">
           {/* Image gallery */}
