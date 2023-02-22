@@ -1,8 +1,8 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
-import axios from "axios";
-import { useEffect } from "react";
+
+import { register } from "../store/slices/user";
 
 export default function Register() {
   const [name, setName] = useState("");
@@ -17,7 +17,9 @@ export default function Register() {
     const name = e.target.name.value;
     const email = e.target.email.value;
     const password = e.target.password.value;
-    dispatch(registerUser({ name, email, password }));
+
+    const user = { name, email, password };
+    dispatch(register(user));
     navigate("/products");
   };
 

@@ -5,30 +5,31 @@ export const getProducts = createAsyncThunk(
   "products/getProducts",
   async () => {
     const response = await axios.get("http://localhost:3000/products");
-    return response.data.products;
+    return response.data;
   }
 );
 
-const initialState = {
-  loading: false,
-  products: [],
-  error: null,
-  success: false,
-};
-
-const productsSlice = createSlice({
+export const productsSlice = createSlice({
   name: "products",
-  initialState: { entities: [], loading: "idle" },
+  initialState: {
+    loading: false,
+    products: [],
+    error: null,
+    success: false,
+  },
   reducers: {},
-  extraReducers: (builder) => {
-    builder
-      .addCase(getProducts.pending, (state, action) => {
-        state.loading = "pending";
-      })
-      .addCase(getProducts.fulfilled, (state, action) => {
-        state.loading = "idle";
-        state.entities.push(...action.payload);
-      });
+  extraReducers: {
+    [getProducts.pending]: (state) => {
+      state.loading = true;
+    },
+    [getProducts.fulfilled]: (state, action) => {
+      state.loading = false;
+      state.products = action.payload;
+    },
+    [getProducts.rejected]: (state, action) => {
+      state.loading = false;
+      state.error = action.payload;
+    },
   },
 });
 
