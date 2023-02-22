@@ -1,0 +1,26 @@
+import { useState } from "react";
+import { Routes, Route } from "react-router-dom";
+import Login from "./pages/login";
+import ProductPage from "./pages/products";
+// import StudentForm from "./components/studentForm";
+import Layout from "./components/layout";
+import Register from "./pages/register";
+
+function App() {
+  return (
+    <>
+      <Routes>
+        <Route path="/" element={<Login />} />
+        <Route path="/register" element={<Register />} />
+        <Route element={<Layout />}>
+          <Route path="/products" element={<ProductPage />} />
+          {/* <Route path="/students/news" element={<StudentForm />} /> */}
+        </Route>
+
+        <Route path="*" element={<h1>404</h1>} />
+      </Routes>
+    </>
+  );
+}
+
+export default App;
