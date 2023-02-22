@@ -1,17 +1,24 @@
-import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import useProductStore from "../store/slices/productZustand";
+import { fetchProducts } from "../store/slices/product";
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect, useCallback } from "react";
 
 export default function ProductPage() {
   const navigate = useNavigate();
-  const getProduct = useProductStore((state) => state.getProducts);
-  const products = useProductStore((state) => state.products);
+  // const getProduct = useProductStore((state) => state.getProducts);
+  // const products = useProductStore((state) => state.products);
+
+  const dispatch = useDispatch();
+  const products = useSelector((state) => state.products);
+
+  const initFetch = useCallback(() => {
+    dispatch(fetchProducts());
+  }, [dispatch]);
 
   useEffect(() => {
-    getProduct();
-  }, []);
-
-  console.log(products);
+    initFetch();
+  }, [initFetch]);
 
   return (
     <>

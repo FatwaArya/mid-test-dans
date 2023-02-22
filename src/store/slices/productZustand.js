@@ -8,6 +8,11 @@ const useProductStore = create((set) => ({
     const data = response.data;
     set({ products: data.products });
   },
+  getProduct: async (id) => {
+    const response = await axios.get(`http://localhost:3000/products/${id}`);
+    const data = response.data;
+    set({ products: [data] });
+  },
 }));
 
 export default useProductStore;

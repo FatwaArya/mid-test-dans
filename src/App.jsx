@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Routes, Route } from "react-router-dom";
 import Login from "./pages/login";
 import ProductPage from "./pages/products";
-// import StudentForm from "./components/studentForm";
+import ProductDetail from "./pages/productDetail";
 import Layout from "./components/layout";
 import Register from "./pages/register";
 
@@ -15,7 +15,7 @@ function App() {
         <Route element={<Layout />}>
           <Route path="/products" element={<ProductPage />} />
           {/* product detail with route id */}
-          {/* <Route path="/products/:id" element={<ProductDetail />} /> */}
+          <Route path="/products/:id" element={<ProductDetail />} />
         </Route>
 
         <Route path="*" element={<h1>404</h1>} />
