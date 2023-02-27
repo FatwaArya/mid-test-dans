@@ -38,6 +38,12 @@ export default function Example() {
 
   const asPath = useLocation();
   const navigate = useNavigate();
+  //if theres no token, redirect to login
+  useEffect(() => {
+    if (!userInfo) {
+      navigate("/");
+    }
+  }, [userInfo, navigate]);
 
   useEffect(() => {
     if (asPath) {

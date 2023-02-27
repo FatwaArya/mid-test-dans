@@ -5,7 +5,7 @@ const redis = require("redis");
 const redisClient = redis.createClient();
 const router = express.Router();
 
-router.get("/products", async (req, res) => {
+router.get("/products", auth, async (req, res) => {
   redisClient.get("products", async (err, data) => {
     if (err) throw err;
     if (data !== null) {
@@ -18,7 +18,7 @@ router.get("/products", async (req, res) => {
   });
 });
 
-router.get("/products/:id", async (req, res) => {
+router.get("/products/:id", auth, async (req, res) => {
   const _id = req.params.id;
   redisClient.get(_id, async (err, data) => {
     if (err) throw err;

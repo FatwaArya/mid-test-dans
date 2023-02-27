@@ -62,7 +62,6 @@ userSchema.methods.toJSON = function () {
   const userObject = user.toObject();
   delete userObject.password;
   delete userObject.tokens;
-  delete userObject.avatar;
 
   return userObject;
 };
@@ -99,11 +98,6 @@ userSchema.pre("save", async function (next) {
     user.password = await bcrypt.hash(user.password, 8);
   }
 
-  next();
-});
-userSchema.pre("deleteOne", { document: true }, async function (next) {
-  const user = this;
-  await Task.deleteMany({ author: user._id });
   next();
 });
 

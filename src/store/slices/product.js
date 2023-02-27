@@ -6,7 +6,11 @@ export const initialState = [];
 export const fetchProducts = createAsyncThunk(
   "products/fetchProducts",
   async () => {
-    const response = await axios.get("http://localhost:3000/products");
+    const response = await axios.get("http://localhost:3000/products", {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
+    });
     return response.data.products;
   }
 );
@@ -14,7 +18,11 @@ export const fetchProducts = createAsyncThunk(
 export const fetchProduct = createAsyncThunk(
   "products/fetchProduct",
   async (id) => {
-    const response = await axios.get(`http://localhost:3000/products/${id}`);
+    const response = await axios.get(`http://localhost:3000/products/${id}`, {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
+    });
     return response.data;
   }
 );

@@ -6,8 +6,7 @@ import { useEffect, useCallback } from "react";
 
 export default function ProductPage() {
   const navigate = useNavigate();
-  // const getProduct = useProductStore((state) => state.getProducts);
-  // const products = useProductStore((state) => state.products);
+  //if no token, redirect to login
 
   const dispatch = useDispatch();
   const products = useSelector((state) => state.products);
